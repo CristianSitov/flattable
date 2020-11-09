@@ -142,6 +142,9 @@ class ChangesBuilderHelper
         $values = array_values(Arr::except($changesTableData, $notPresent));
 
         //combine flat table columns and changes table data
+        if (empty($values)) {
+            $values = array_fill(0, count($flatTableColumnsThatChanges), null);
+        }
         $changesData = array_combine($flatTableColumnsThatChanges, $values);
 
         $insideChangeConfig = Arr::get($changeConfig, 'changes', []);
